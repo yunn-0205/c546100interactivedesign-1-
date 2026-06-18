@@ -4,7 +4,6 @@ let riverFocus = 0;
 let riverMemory = 0;
 let riverClicks = 0;
 
-// UI 변수
 let selectStartLine, selectStartStation, btnStart;
 
 function preload() {
@@ -80,7 +79,7 @@ function resetToFirstScreen() {
   isFirstRide = true;
   hasSeenLine1 = false;
   hasSeenLine9 = false;
-  hasSeenHanRiver = false; // 한강 에피소드 제어용 변수 초기화
+  hasSeenHanRiver = false;
   myLines = [];
   transferLinks = [];
   currentLine = "";
@@ -104,7 +103,7 @@ let state = 0;
 let isFirstRide = true;
 let hasSeenLine1 = false;
 let hasSeenLine9 = false;
-let hasSeenHanRiver = false; // 한강 에피소드 제어용 변수 추가
+let hasSeenHanRiver = false;
 
 let myLines = [];
 let transferLinks = [];
@@ -165,9 +164,8 @@ const hanRiverStations = [
   "청담",
 ];
 
-// 한 줄에 한 문장씩 명확히 정리된 텍스트
 let episodeTexts = {
-  1: "외부와 철저히 단절된 채 복잡한 현실을 벗어납니다.\n오롯이 자신만의 4인치 우주 속으로 깊이 빠져듭니다.\n그것은 군중 속에서 누리는 완벽한 고립의 시간입니다.",
+  1: "외부와 철저히 단절된 채 복잡한 현실을 벗어납니다.\n오롯이 스마트폰이라는 자신만의 4인치 우주 속으로 깊이 빠져듭니다.\n그것은 군중 속에서 누리는 완벽한 고립의 시간입니다.",
   2: "만원 열차 안에서 이리저리 치이는 거친 흔들림이 이어집니다.\n사람들은 각자의 좁은 공간을 사수하기 위해 애를 씁니다.\n무심한 표정으로 꿋꿋하게 서로를 밀어내는 일상입니다.",
   3: "우연히 타인과 시선이 마주칠 뻔한 아슬아슬한 찰나의 순간입니다.\n반사적으로 고개를 돌려 상대방을 시야에서 완전히 지워버립니다.\n어색함을 지우기 위한 조용한 회피를 보여줍니다.",
   4: "열차가 급정거하며 모두의 몸이 한쪽으로 크게 쏠립니다.\n위태로운 상황에서도 타인에게 기대지 않으려 발끝에 힘을 줍니다.\n서로의 거리를 유지하며 미세한 균형을 필사적으로 잡습니다.",
@@ -186,9 +184,6 @@ let episodeTexts = {
 
 let mapPaths = {};
 
-// =====================================
-// 유틸리티 및 데이터 관리 함수들
-// =====================================
 function saveCurrentJourney() {
   if (visitedStations.length > 0) {
     pastJourneys.push([...visitedStations]);
@@ -585,8 +580,8 @@ function drawPhase1() {
   }
 
   push();
-  if (currentEpisode === 2 || currentEpisode === 14 || currentEpisode === 9) {
-    let shakeForce = currentEpisode === 14 ? 5 : currentEpisode === 9 ? 3.5 : 2;
+  if (currentEpisode === 2 || currentEpisode === 14) {
+    let shakeForce = currentEpisode === 14 ? 5 : 2;
     translate(
       sin(frameCount * 0.8) * shakeForce,
       cos(frameCount * 0.6) * (shakeForce / 2),
@@ -1181,6 +1176,7 @@ function mousePressed() {
       }
     } else if (currentEpisode === 9) {
       if (dMe < particles[0].r * 1.5) {
+        particles[0].isSunsetTinted = !particles[0].isSunsetTinted;
       }
     } else if (currentEpisode === 15) {
       let windowW = width / 4;
